@@ -1,0 +1,193 @@
+My i3 setup
+
+#############################
+##### Installing apps #######
+#############################
+
+sudo apt install i3 i3status i3lock arandr nitrogen feh synapse
+
+customization look and feel
+https://www.youtube.com/watch?v=3tK_bi_PFeY
+
+#############################
+### config for volumeicon ###
+#############################
+http://nullwise.com/volumeicon.html
+sudo apt install intltool gtk+-3.0 libasound2-dev
+
+
+#############################
+##### config for network ####
+#############################
+$ sudo apt install network-manager                #for Ubuntu users
+$ sudo apt install network-manager-gnome          #to install applet for Ubuntu users 
+search nm-applet in dmenu for network icon
+
+
+
+#############################
+## Installing Fontawesome ###
+#############################
+
+wget "https://use.fontawesome.com/releases/v5.0.13/fontawesome-free-5.0.13.zip"
+unzip fontawesome-free-5.0.13.zip
+sudo cp fontawesome-free-5.0.13/use-on-desktop/* /usr/local/share/fonts/
+fc-cache -f -v
+#the next command help see the name to use
+#here Font Awesome 5 Free
+fc-list | grep -i "awe"
+
+#icon cheat
+https://fontawesome.com/cheatsheet?from=io
+
+https://medium.com/@labruillere/minimal-i3-ubuntu-18-04-ba1bb31436ff
+
+
+#############################
+###     i3-gaps setup     ###
+#############################
+url from github
+https://github.com/Airblader/i3/wiki/Compiling-&-Installing
+
+#### youtube Tutorial ######
+https://www.youtube.com/watch?v=94Nhq-qWj98
+
+sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake libsnack2-dev libxcb-shape0-dev autoconf libev-dev build-essential git
+
+
+#############################
+##Setup brightness control ##
+#############################
+check link below
+https://cialu.net/brightness-control-not-work-i3wm/
+
+# save and log out of system
+
+# extra config
+https://github.com/ClonedOne/c1-dotfiles
+
+
+# set time through the terminal 
+sudo dpkg-reconfigure tzdata
+
+
+#############################
+###     setup polybar     ###
+#############################
+1. sudo apt-get install -y cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev libxcb-composite0-dev xcb libxcb-ewmh2
+
+2.    git clone https://github.com/jaagr/polybar.git
+
+3.    cd polybar && ./build.sh (enter y when it prompts for some installation)
+
+
+
+#############################
+###     setup pywal       ###
+#############################
+sudo apt install python3-pip -y
+sudo pip3 install pywal 
+sudo apt install variety -y
+### edit squences.py to fix pywal error in ubuntu.###
+/usr/local/lib/python3.6/dist-packages/pywal/sequences.py
+
+
+#### look for this line #####
+    if not vte_fix:
+        sequences.extend(
+            set_color(708, colors["special"]["background"], "l", alpha)
+        )
+## change it from set_special to set_color
+
+or 
+#### look for this line #####
+    if not vte_fix:
+        sequences.extend(
+            set_color("l", alpha)
+        )
+## change it from set_special to set_color
+
+#### Add to .bash.rc ######
+(cat ~/.cache/wal/sequences &)
+screenfetch
+
+
+
+
+
+
+#############################
+###     setup conky       ###
+#############################
+# add to terminal
+sudo gedit /usr/share/contractor/Open_as_admin.contract
+
+[Contractor Entry]
+Name=Open folder as root
+Icon=gksu-root-terminal
+Description=Open folder as root
+MimeType=inode;application/x-sh;application/x-executable;
+Exec=/usr/bin/io.elementary.files-pkexec
+Gettext-Domain=pantheon-files
+
+# Authentication agent request in i3wm (pops up authentication dialog)
+sudo apt install policykit-desktop-privileges policykit-1-gnome
+
+# add this to i3wm config to startup authentication dialog on login
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Reboot systeam
+
+Add conky file to usr/share/conky
+Add conky run files to usr/bin
+
+
+
+
+# terminal music visualizer
+https://github.com/dpayne/cli-visualizer
+
+# pipes terminal visual
+https://github.com/pipeseroni/pipes.sh
+
+
+# Removing the max, min and close buttons
+https://faq.i3wm.org/question/5583/gtk3-applications-button-layout.1.html
+
+
+# Removing snapd from ubuntu
+sudo apt autoremove --purge snapd gnome-software-plugin-snap
+
+rm -fr ~/snap
+
+# setting mouse touch pad
+https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/
+
+
+###########################################
+########### Polybar Icon ##################
+###########################################
+
+https://github.com/stark/siji
+
+######### Add this to polybar font #######
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = Wuncon Siji:pixelsize=10;1
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-5 = "Font Awesome 5 Brands:pixelsize=8;1"
+
+
+###########################################
+##### Install slick-greeter ###############
+###########################################
+sudo apt-get remove lightdm-gtk-greeter && sudo apt-get install --reinstall slick-greeter
+
+##restart lightdm
+sudo invoke-rc.d lightdm restart
+
+
+
+
+
