@@ -26,19 +26,15 @@ if (command -v system-config-printer-applet && ! pgrep applet.py ); then
 fi
 
 
-run xfsettingsd
-run "light-locker"
+
 run "thunar --daemon"
-run blueman-applet
 run "msm_notifier"
-run "variety"
 run "xfce4-power-manager"
-run "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1"
 run "numlockx on"
 run "volumeicon"
 #run "cerebro"
 #run "synapse"
-run "nitrogen --restore"
+#run "nitrogen --restore"
 run "light-locker"
 run "compton"
 run ".conky/conky-startup.sh"
@@ -50,10 +46,10 @@ pkill conky
 
 
 sleep 3
-#run "conky -c $HOME/.config/awesome/system-overview"
-#run "conky -c $HOME/.config/awesome/conky/conkyrc.lua"
-run "conky -c $HOME/.config/awesome/conky/conky_green"
-run "conky -c $HOME/.config/awesome/conky/conky1.10_shortcuts_green" 
+
+run "conky -c $HOME/.config/conky/pywal_conky.py" 
+run "conky -c $HOME/.config/conky/conky_green.conf"
+run "conky -c $HOME/.config/conky/conky1.10_shortcuts_green.conf" 
 #run "conky -c $HOME/.config/awesome/conky/conky_draw.lua"
 #sleep 1
 #run "conky -c $HOME/.config/awesome/conky/seamod_rings.lua"

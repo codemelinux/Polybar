@@ -95,10 +95,14 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym Control+$mod+l exec i3lock 
 bindsym Control+space exec synapse
-bindsym $mod+Shift+Return exec thunar
+bindsym $mod+Shift+Return exec nautilus
 bindsym $alt+d exec xfce4-appfinder
 bindsym $mod+g exec google-chrome
-bindsys $mod+f exec firefox
+bindsym $mod+F1 exec firefox 
+bindsym $mod+d exec dmenu_run -nb "$c0" -nf "$c15" -sb "$c1" -sf "$c15"
+#bindsym $mod+d exec --no-startup-id exec rofi -combi-modi window drun -show combi
+#bindsym $mod+d exec --no-startup-id exec rofi -modi drun -show drun
+
 
 # focus_follows_mouse no
 
@@ -229,7 +233,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # assign [class="Gnome-terminal"] $ws1
 #assign [class="Nautilus"] $ws2
 #assign [class="Code"] $ws3
-#assign [class="vlc"] $ws4
+#assign [class="Spotify"] $ws4
 #assign [class="Firefox"] $ws5
 #assign [class="Google-chrome"] $ws6
 
@@ -265,7 +269,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="Nvidia-settings"] floating enable
-for_window [class="Gnome-terminal"] floating enable
+#for_window [class="Gnome-terminal"] floating enable
 
 
 # switch to workspace with urgent window automatically
@@ -348,24 +352,7 @@ mode "resize" {
 # to:
 # background $term_background
 # Same logic applied to everything else.
-set_from_resource $term_background background
-set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 #bar {
@@ -398,32 +385,46 @@ set_from_resource $term_color15    color15
   #  }
 #}
 
-#######################################################
-############### Polybar startup   #####################
-#######################################################
 
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-#exec_always --no-startup-id ~/.config/polybar/bottomPanel.sh
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
 
-# Theme colors
-# class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
-  client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+#### pywal color gen #######
+ set_from_resource $c0 i3wm.color0 #f0f0f0
+ set_from_resource $c1 i3wm.color1 #f0f0f0
+ set_from_resource $c2 i3wm.color2 #f0f0f0
+ set_from_resource $c3 i3wm.color3 #f0f0f0
+ set_from_resource $c4 i3wm.color4 #f0f0f0
+ set_from_resource $c5 i3wm.color5 #f0f0f0
+ set_from_resource $c6 i3wm.color6 #f0f0f0
+ set_from_resource $c7 i3wm.color7 #f0f0f0
+ set_from_resource $c8 i3wm.color8 #f0f0f0
+ set_from_resource $c9 i3wm.color9 #f0f0f0
+ set_from_resource $c10 i3wm.color10 #f0f0f0
+ set_from_resource $c11 i3wm.color11 #f0f0f0
+ set_from_resource $c12 i3wm.color12 #f0f0f0
+ set_from_resource $c13 i3wm.color13 #f0f0f0
+ set_from_resource $c14 i3wm.color14 #f0f0f0
+ set_from_resource $c15 i3wm.color15 #f0f0f0
 
-  client.background       #2B2C2B
+# class                 border  backgr. text indicator child_border
+ client.focused          $c15    $c15    $c0  $c15      $c15
+ client.focused_inactive $c2     $c2     $c7  $c2       $c2
+ client.unfocused        $c2     $c2     $c7  $c2       $c2
+ client.urgent           $c4     $c4     $c0  $c2       $c2
+ client.placeholder      $c2     $c2     $c7  $c2       $c2
+
+ client.background       $c0
+
 
 #######################################################
 ############### settings for i3-gaps: #################
 #######################################################
 
 # Set inner/outer gaps
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 2
+for_window [class=Synapse] border none
 gaps inner 12
 gaps outer 1
 
@@ -476,32 +477,31 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+#######################################################
+############### Polybar startup   #####################
+#######################################################
+
+exec_always --no-startup-id ~/.config/polybar/launch.sh &amp;
+#exec_always --no-startup-id ~/.config/polybar/bottomPanel.sh
+
 ########################################
 ####### start program launcher ########
 #######################################
 
-
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1;
 exec --no-startup-id nm-applet
 exec --no-startup-id clipit
 exec --no-startup-id wal -R
-
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
-#exec --no-startup-id start_conky_maia
-#exec --no-startup-id start_conky_green
+exec --no-startup-id xfsettingsd
+exec --no-startup-id variety
+exec --no-startup-id blueman-applet
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
-
-
-# start program launcher
-bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec --no-startup-id exec rofi -combi-modi window drun -show combi
-#bindsym $mod+d exec --no-startup-id exec rofi -modi drun -show drun
 
 #exec --no-startup-id xfce4-panel --disable-wm-check
 exec_always --no-startup-id $HOME/.config/i3/autostart.sh
@@ -510,7 +510,6 @@ exec_always --no-startup-id $HOME/.config/i3/autostart.sh
 ########################################
 ########### Pywal setup ################
 ########################################
-
 
 
 bindsym $alt+Shift+n exec variety -n && wal -i $(cat $HOME/ .config/variety/wallpaper/wallpaper.jpg.txt) ### Next Pywal wallpaper
