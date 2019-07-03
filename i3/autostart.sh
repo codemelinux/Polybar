@@ -47,9 +47,9 @@ pkill conky
 
 sleep 3
 
-run "conky -c $HOME/.config/conky/pywal_conky.py" 
+run $HOME/.config/conky/Conky/startconky.sh
 run "conky -c $HOME/.config/conky/conky_green.conf"
-run "conky -c $HOME/.config/conky/conky1.10_shortcuts_green.conf" 
+#run "conky -c $HOME/.config/conky/conky1.10_shortcuts_green.conf" 
 #run "conky -c $HOME/.config/awesome/conky/conky_draw.lua"
 #sleep 1
 #run "conky -c $HOME/.config/awesome/conky/seamod_rings.lua"

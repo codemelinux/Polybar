@@ -112,8 +112,8 @@ font-5 = "Font Awesome 5 Brands:pixelsize=8;1"
 ################  module position topPanel   ###################
 
 modules-left = bspwm i3
-modules-center = mpd ;date 
-modules-right = ;filesystem xbacklight ;alsa pulseaudio volume memory ;xkeyboard temperature cpu battery wlan eth ;date powermenu 
+modules-center = mpd ;date ;spotify
+modules-right = ;filesystem ;light xbacklight ;alsa pulseaudio     volume memory ;xkeyboard temperature cpu battery ;wlan eth ;date powermenu 
 
 ; tray-position = right
 ; tray-padding = 0
@@ -128,8 +128,8 @@ modules-right = ;filesystem xbacklight ;alsa pulseaudio volume memory ;xkeyboard
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -177,7 +177,7 @@ font-4 = FontAwesome:weight=regular:pixelsize=11;1
 
 modules-left = xwindow
 modules-center = date
-modules-right = filesystem uptime temp_core cpu_load eth ;xkeyboard usb-mount
+modules-right = filesystem uptime ;temp_core ;cpu_load wlan eth ;xkeyboard usb-mount
 
 tray-position = right
 tray-padding = 1
@@ -432,6 +432,9 @@ bar-progress-empty-foreground = ${colors.foreground-alt}
 
 [module/xbacklight]
 type = internal/xbacklight
+;card = nv_backlight
+card = intel_backlight 
+
 
 format = <ramp> <label> <bar>
 label-foreground = ${root.foreground}
@@ -463,6 +466,25 @@ bar-empty-foreground = ${colors.foreground-alt}
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+
+
+#######################################################################
+#########################    light    ###### ##########################
+#######################################################################
+
+[module/light]
+type = custom/script
+interval = 0.2
+exec = ~/.config/polybar/scripts/backlight.sh
+
+scroll-up = exec light -A 5
+scroll-down = exec light -U 5
+
+format-prefix = " "
+
+label = %output%
+label-foreground = #fff
+format-padding = 1
 
 
 #######################################################################
@@ -535,12 +557,14 @@ bar-used-empty-foreground = ${colors.foreground-alt}
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
-interval = 3.0
+interface = wlan0
+interval = 0.5
+ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
-label-connected =  %essid%
+;label-connected =  %essid% %local_ip%
+label-connected =   %downspeed%  %upspeed%
 label-disconnected =   not connected
 label-disconnected-foreground = #66
 
@@ -549,12 +573,24 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+;ramp-signal-0 = 
+;ramp-signal-1 = 
+;ramp-signal-2 = 
+;ramp-signal-3 = 
+;ramp-signal-4 = 
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
 
 
 #######################################################################
@@ -782,7 +818,19 @@ ramp-3 = 
 ramp-4 = 
 ramp-foreground = ${colors.xcolor7}
 
+#######################################################################
+######################     spotify      ###############################
+#######################################################################
 
+[module/spotify]
+type = custom/script
+interval = 5
+format-prefix = "  "  
+format = <label>
+exec = $HOME/.config/polybar/scripts/spotify.py
+
+
+format-underline = #1db954
 
 
 #######################################################################

@@ -17,7 +17,7 @@ new_float normal
 hide_edge_borders none
 
 # Display Setup
-exec_always xrandr --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1366x768 --pos 1920x0 --rotate normal
+exec_always xrandr --output DP-0 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1366x768 --pos 1920x0 --rotate normal
 
 
 # workspace setup
@@ -50,6 +50,7 @@ bindsym $mod+Shift+q kill
 ################################################################################################
 
 exec --no-startup-id volumeicon
+exec --no-startup-id wal -R
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
@@ -256,7 +257,7 @@ for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
+for_window [class="Transmission-gtk"] floating enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -268,7 +269,8 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [class="Nvidia-settings"] floating enable
+for_window [class="Nvidia-settings"] floating enable 
+for_window [class="Xfce4-appfinder"] floating enable 
 #for_window [class="Gnome-terminal"] floating enable
 
 
@@ -490,17 +492,24 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh &amp;
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1/polkit-agent-helper-1
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1;
 exec --no-startup-id nm-applet
 exec --no-startup-id clipit
 exec --no-startup-id wal -R
-exec --no-startup-id xfsettingsd
+exec --no-startup-id xfsettingsd  ##Starts xfce settings manager
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings ### gnome settings mgr
+exec --no-startup-id gnome-flashback ### gnome-control-center functionality
+exec --no-startup-id /usr/bin/mate-settings-daemon  ## Starts mate settings manager
 exec --no-startup-id variety
 exec --no-startup-id blueman-applet
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id gnome-power-manager
+
 
 
 #exec --no-startup-id xfce4-panel --disable-wm-check

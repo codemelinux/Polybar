@@ -1,0 +1,48 @@
+https://wiki.archlinux.org/index.php/Backlight 
+
+http://ubuntuhandbook.org/index.php/2019/03/install-nvidia-418-43-g-sync-support-ubuntu-18-04/
+
+https://superuser.com/questions/1279727/xfce-change-brightness-steps-and-or-change-brightness-key-behavior
+
+******* set brightness on startup aka xfce4 *****
+sudo gedit /etc/udev/rules.d/81-backlight.rules
+
+# Set backlight level to 40
+SUBSYSTEM=="backlight", ACTION=="add", KERNEL=="nvidia_0", ATTR{brightness}="40"
+
+##### 
+1 change themes(icon, whisker logo)
+
+2. check if plymouth is installed (sudo  apt-cache policy plymouth)
+
+3. get plymouth theme from gnome-look.org
+
+4. add to this location (/usr/share/plymouth/themes/)
+#### link the plymouth theme #####
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/darwin/darwin.plymouth 500
+
+##### select plymouth ######
+sudo update-alternatives --config default.plymouth
+
+##### run initramfs update ######
+sudo update-initramfs -u
+
+5. install appmenu  (sudo apt-get install xfce4-appmenu-plugin)
+
+6. tweak panel
+
+7. (optional) install compiz
+
+sudo apt-get install compiz compizconfig-settings-manager compiz-plugins compiz-fusion-plugins-extra
+
+install gnome tweak tool 
+**** replace sierra-compact-theme with desired theme in window decorator **
+/usr/bin/gtk-window-decorator  --metacity-theme Sierra-compact-dark --replace
+
+8. Install vm ware station (https://linuxize.com/post/how-to-install-vmware-workstation-player-on-ubuntu-18-04/)
+
+9. fix gcc issues (http://tuxamito.com/wiki/index.php/Installing_newer_GCC_versions_in_Ubuntu)
+
+10. install linux kernel (http://ubuntuhandbook.org/index.php/2019/03/linux-kernel-5-0-released-how-install-ubuntu/)
+
+
