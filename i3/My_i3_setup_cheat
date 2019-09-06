@@ -1,10 +1,13 @@
 My i3 setup
+https://www.reddit.com/r/unixporn/comments/92guq6/i3polybar_animated_polybar_drop_down_menus/
+
+https://joshtronic.com/2017/07/26/hide-title-bars-in-gnome-shell/
 
 #############################
 ##### Installing apps #######
 #############################
 
-sudo apt install i3 i3status i3lock arandr nitrogen feh synapse
+sudo apt install i3 i3status i3lock arandr nitrogen feh synapse xfce4-power-manager xfce4-appearance xfce4-appfinder
 
 customization look and feel
 https://www.youtube.com/watch?v=3tK_bi_PFeY
